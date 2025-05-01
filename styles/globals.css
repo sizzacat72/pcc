@@ -1,64 +1,9 @@
+/* Clean global styles */
 body {
   margin: 0;
-  background: #fdfdfd;
-  overflow-x: hidden;
-  cursor: none;
-}
-
-.main {
-  padding: 6rem 2rem;
-  text-align: center;
-  min-height: 200vh;
-  position: relative;
-}
-
-.title {
-  font-size: 4rem;
-  font-weight: bold;
-}
-
-.subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.floating-element {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.floating-image {
-  border-radius: 1rem;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-}
-
-.nav-toggle {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  z-index: 100;
-  padding: 0.5rem 1rem;
-  background: black;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.nav-overlay {
-  position: fixed;
-  inset: 0;
-  background: white;
-  z-index: 99;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-overlay ul {
-  list-style: none;
-  font-size: 2rem;
   padding: 0;
+  font-family: sans-serif;
+  background: #fff;
+  color: #000;
 }
+
