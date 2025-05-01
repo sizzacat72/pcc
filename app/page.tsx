@@ -1,114 +1,40 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
+import FloatingElement from '../components/FloatingElement'
+import AnimatedNav from '../components/AnimatedNav'
+import CustomCursor from '../components/CustomCursor'
 import Lenis from 'lenis'
-import Image from 'next/image'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import '../styles/globals.css'
 
 export default function Home() {
-  const containerRef = useRef(null)
-  const headingRef = useRef(null)
-  const paragraphRef = useRef(null)
-  const imageRef = useRef(null)
-
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
-
-    // Lenis smooth scrolling setup
     const lenis = new Lenis()
-    const raf = (time: number) => {
+    function raf(time: number) {
       lenis.raf(time)
       requestAnimationFrame(raf)
     }
     requestAnimationFrame(raf)
-
-    // GSAP animations
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1,
-      },
-    })
-
-    tl.fromTo(
-      headingRef.current,
-      { y: 100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.5, ease: 'power4.out' }
-    )
-    .fromTo(
-      paragraphRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: 'power2.out' },
-      "-=1"
-    )
-    .fromTo(
-      imageRef.current,
-      { scale: 0.8, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1, ease: 'expo.out' },
-      "-=0.8"
-    )
-
-    return () => {
-      lenis.destroy()
-      ScrollTrigger.kill()
-    }
+    return () => lenis.destroy()
   }, [])
 
   return (
-    <main
-      ref={containerRef}
-      style={{
-        minHeight: '200vh',
-        padding: '6rem 4rem',
-        fontFamily: 'sans-serif',
-        background: 'linear-gradient(180deg, #f2f2f2, #fff)',
-        color: '#111',
-      }}
-    >
-      <h1
-        ref={headingRef}
-        style={{
-          fontSize: '4rem',
-          marginBottom: '1.5rem',
-          letterSpacing: '-0.05em',
-          fontWeight: 700,
-        }}
-      >
-        Perfect Cut Collaboration
-      </h1>
-      <p
-        ref={paragraphRef}
-        style={{
-          fontSize: '1.5rem',
-          maxWidth: '40rem',
-          lineHeight: 1.6,
-          color: '#444',
-        }}
-      >
-        This site is fully animated using GSAP and scroll-synced with Lenis. The content animates
-        smoothly as you scroll, thanks to Next.js App Router, with blazing-fast static export via Netlify.
-      </p>
-      <div style={{ marginTop: '4rem', maxWidth: '800px' }}>
-        <Image
-          ref={imageRef}
-          src="/rugs/rug4.jpeg"
-          alt="Featured Rug"
-          width={800}
-          height={500}
-          style={{
-            borderRadius: '2rem',
-            boxShadow: '0 30px 60px rgba(0,0,0,0.2)',
-            width: '100%',
-            height: 'auto',
-            objectFit: 'cover',
-          }}
-        />
-      </div>
-    </main>
+    <>
+      <CustomCursor />
+      <AnimatedNav />
+      <main className="main">
+        <h1 className="title">Perfect Cut Collaboration</h1>
+        <p className="subtitle">A floating gallery of handpicked rugs</p>
+
+        <FloatingElement src="/rugs/rug1.jpeg" index={0} />
+        <FloatingElement src="/rugs/rug2.jpeg" index={1} />
+        <FloatingElement src="/rugs/rug3.jpeg" index={2} />
+        <FloatingElement src="/rugs/rug4.jpeg" index={3} />
+        <FloatingElement src="/rugs/rug5.jpeg" index={4} />
+        <FloatingElement src="/rugs/rug6.jpeg" index={5} />
+        <FloatingElement src="/rugs/rug7.jpeg" index={6} />
+      </main>
+    </>
   )
 }
-
-
